@@ -154,5 +154,17 @@ namespace TransferServiceUnitTests
             Assert.True(transferOk);
             AssertEqual(0.0, fromAccount.Balance);
         }
+
+        [Fact]
+        public void Transfer_NegativeTransfer_NotAllowed()
+        {
+            var fromAccount = new Account(FromAccountNumber, 77.88);
+            var toAccount = new Account(ToAccountNumber, 53.75);
+            bool transferOk = false;
+
+            transferOk = BankTransferService.Transfer(fromAccount, toAccount, -77.88);
+
+            Assert.False(transferOk);
+        }
     }
 }

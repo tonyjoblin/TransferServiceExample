@@ -17,11 +17,24 @@ namespace TransferService
             return 0.0;
         }
 
+        /// <summary>
+        /// Transfers money from the 'from' account to the 'to' account.
+        /// Overdraws are charged a fee.
+        /// May throw an exception if the accounts are not valid.
+        /// </summary>
+        /// <param name="from">Account from where the money is withdrawn</param>
+        /// <param name="to">Account where money is deposited</param>
+        /// <param name="transferAmount">The amount of money transfered, must be positive.</param>
+        /// <returns>False if the transaction is not allowed.</returns>
         public static bool Transfer(Account from, Account to, double transferAmount)
         {
             if (from == null || to == null)
             {
                 throw new TransferException();
+            }
+            if (transferAmount < 0.0)
+            {
+                return false;
             }
             if (from.Balance < 0.0)
             {
