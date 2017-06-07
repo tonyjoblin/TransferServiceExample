@@ -15,14 +15,7 @@ namespace TransferService
             public double Value
             {
                 get { return m_value; }
-                set
-                {
-                    if (value < 0.0)
-                    {
-                        throw new AccountOverdrawnException();
-                    }
-                    m_value = value;
-                }
+                set { m_value = value; }
             }
         }
         private readonly BalanceValue balance = new BalanceValue();
